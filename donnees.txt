@@ -1,0 +1,12 @@
+101325.0                                           ! Pamb [Pa]
+100000.0                                           ! Qboilleur [W]
+85000.0						   ! Qcondenseur [W]
+3                                                  ! NC
+30						   ! NET
+14						   ! Étage d'alimentation
+0.6  146.43  -7792.3  -20.614  0.024578   1.0      ! Z, Antoine  Chloroforme
+0.3   81.768  -6876.0   -8.7078  7.1926E-06  2.0   ! Z, Antoine  Methanol
+0.1   69.006  -5599.6   -7.0985  6.2237E-06  2.0   ! Z, Antoine  Acetone
+6.89E+04  1.17E+05  2.95E+07  334.33               ! CPvap, CPliq, DHvap, Teb  Chloroforme
+4.64E+04  8.91E+04  3.53E+07  337.85               ! CPvap, CPliq, DHvap, Teb  Methanol
+8.05E+04  1.34E+05  2.96E+07  329.44               ! CPvap, CPliq, DHvap, Teb  Acetone
