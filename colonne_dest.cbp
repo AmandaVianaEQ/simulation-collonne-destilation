@@ -31,6 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="NTRL.f90" />
 		<Unit filename="lecture_donnees.f90" />
 		<Unit filename="main.f90" />
 		<Extensions />

@@ -1,7 +1,7 @@
-SUBROUTINE lecture_donnees(NC,NET,N_ALIM,npairs,Pamb,Qboilleur,Qcondenseur,COEFNRTL &
+SUBROUTINE lecture_donnees(Nconst,NET,N_ALIM,npairs,Pamb,Qboilleur,Qcondenseur,COEFNRTL &
                               z_alim, A_ant, B_ant, C_ant, D_ant, E_ant,CPvap, CPliq, Delta_Hvap)
     IMPLICIT NONE
-    INTEGER i,NC,NET,N_ALIM,npairs
+    INTEGER i,Nconst,NET,N_ALIM,npairs
     DOUBLE PRECISION Pamb,Qboilleur,Qcondenseur
     DOUBLE PRECISION, ALLOCATABLE :: z_alim(:)
     DOUBLE PRECISION, ALLOCATABLE :: A_ant(:), B_ant(:), C_ant(:), D_ant(:), E_ant(:)
@@ -13,7 +13,7 @@ SUBROUTINE lecture_donnees(NC,NET,N_ALIM,npairs,Pamb,Qboilleur,Qcondenseur,COEFN
         READ(10,*) Pamb
         READ(10,*) Qboilleur
         READ(10,*) Qcondenseur
-        READ(10,*) NC
+        READ(10,*) Nconst
         READ(10,*) NET
         READ(10,*) N_ALIM
 

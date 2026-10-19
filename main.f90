@@ -1,6 +1,6 @@
 PROGRAM colonne_dest
     IMPLICIT NONE
-    INTEGER i,j,NC,NET,N_ALIM,npairs
+    INTEGER i,j,Nconst,NET,N_ALIM,Nvariables,npairs,deplac
     DOUBLE PRECISION Pamb, Qboilleur, Qcondenseur, Alim
     DOUBLE PRECISION, ALLOCATABLE :: z_alim(:), x_coll(:,:), y_coll(:,:),omega(:)
     DOUBLE PRECISION, ALLOCATABLE :: A_ant(:), B_ant(:), C_ant(:), D_ant(:), E_ant(:)
@@ -14,11 +14,11 @@ PROGRAM colonne_dest
     DOUBLE PRECISION, ALLOCATABLE :: Vecteur_Eq(:),Vecteur_Variables(:)
 
 !   PARAMETERS METHODE MRSL21
-!    INTEGER N,M,N1A,NLA,NC,IER,IRAZ,IMET
-!    DOUBLE PRECISION, PARAMETER :: EPS = 1.0D-12
-!    DOUBLE PRECISION A(:),B(:),C(:),F(:)
+    INTEGER N,M,N1A,NLA,NC,IER,IRAZ,IMET
+    DOUBLE PRECISION, PARAMETER :: EPS = 1.0D-12
+    DOUBLE PRECISION A(:),B(:),C(:),F(:)
 
-    CALL lecture_donnees(NC,NET,N_ALIM,npairs,Pamb,Qboilleur,Qcondenseur,COEFNRTL &
+    CALL lecture_donnees(Nconst,NET,N_ALIM,npairs,Pamb,Qboilleur,Qcondenseur,COEFNRTL &
                         x0, A_ant, B_ant, C_ant, D_ant, E_ant,CPvap, CPliq, Delta_Hvap)
 
     ALLOCATE(V(NET),L(NET),Temp(NET))
@@ -27,27 +27,33 @@ PROGRAM colonne_dest
     ALLOCATE(CPvap(NC), CPliq(NC), Delta_Hvap(NC), Teb(NC))
     ALLOCATE(Vecteur_Eq(),Vecteur_Variables())
 
-!   PREENCHENDO O VETOR DE VARIAVEIS
-    ! Vapeur a chaque étage
+    Nvariables = 2*NC+3 !Nombre de variables
+
+!   REMPLISSAGE DU VECTEUR DE VARIABLES
     DO j=1,NET
-        Vecteur_Variables(j)= V(j)
-    END DO
-    ! Composition de vapeur à l'étage 1
-    DO i=1,NC
-        Vecteur_Variables(NET+i) = y_coll(i,1)
-    END DO
-    ! Composition de vapeur à l'étage intermediaire
-    DO j=1,NET
-        DO i=1,NC
-            Vecteur_Variables(NET+NC+i) = y_coll(i,j)
+        deplac = (j-1)*Nvariables   !Déplacement a chaque loop
+        !Vapeur
+        Vecteur_Variables(deplac+1) = V(j)
+        !Composition de vapeur
+        DO i = 1, NC
+            Vecteur_Variables(deplac + 1 + i) = y_coll(i,j)
         END DO
+        !Temperature
+        Vecteur_Variables(deplac + Nconst + 2) = Temp(j)
+        !Composition de liquide
+        DO i = 1, NC
+            Vecteur_Variables(deplac + Nconst + 2 + i) = x_coll(i,j)
+        END DO
+        !Liquide
+        Vecteur_Variables(desloc + Nvariables) = L(j)
     END DO
-    ! Composition de vapeur à l'étage final
-    DO i=1,NC
-        Vecteur_Variables(2*NET+2*NC+i) = y_coll(i,NET)
+
+!   REMPLISSAGE DU VECTEUR D'EQUATIONS
+    DO j=1,NET
+
     END DO
-    ! Temperature a chaque étage
-    DO i=
+
+
 
 ! ------------------------------------------------------------
 
