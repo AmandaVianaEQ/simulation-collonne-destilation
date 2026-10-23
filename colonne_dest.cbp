@@ -31,9 +31,24 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="NTRL.f90" />
-		<Unit filename="lecture_donnees.f90" />
-		<Unit filename="main.f90" />
+		<Unit filename="NTRL.f90">
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="initialisation.f90">
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="lecture_donnees.f90">
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="main.f90">
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="mrsl21.f">
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="residus.f90">
+			<Option weight="0" />
+		</Unit>
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

@@ -1,8 +1,8 @@
-SUBROUTINE lecture_donnees(Nconst,NET,N_ALIM,npairs,Pamb,Qboilleur,Qcondenseur,COEFNRTL &
+SUBROUTINE lecture_donnees(Nconst,NET,N_ALIM,npairs,Pamb,Qboilleur,Qcondenseur,COEFNRTL,Alim,Teb, &
                               z_alim, A_ant, B_ant, C_ant, D_ant, E_ant,CPvap, CPliq, Delta_Hvap)
     IMPLICIT NONE
     INTEGER i,Nconst,NET,N_ALIM,npairs
-    DOUBLE PRECISION Pamb,Qboilleur,Qcondenseur
+    DOUBLE PRECISION Pamb,Qboilleur,Qcondenseur,Alim
     DOUBLE PRECISION, ALLOCATABLE :: z_alim(:)
     DOUBLE PRECISION, ALLOCATABLE :: A_ant(:), B_ant(:), C_ant(:), D_ant(:), E_ant(:)
     DOUBLE PRECISION, ALLOCATABLE :: CPvap(:), CPliq(:), Delta_Hvap(:), Teb(:)
@@ -15,23 +15,22 @@ SUBROUTINE lecture_donnees(Nconst,NET,N_ALIM,npairs,Pamb,Qboilleur,Qcondenseur,C
         READ(10,*) Qcondenseur
         READ(10,*) Nconst
         READ(10,*) NET
+        READ(10,*) Alim
         READ(10,*) N_ALIM
 
-        npairs = NC*(NC-1)/2
+        npairs = Nconst*(Nconst-1)/2
 
-        ALLOCATE(A_ant(NC), B_ant(NC), C_ant(NC), D_ant(NC), E_ant(NC))
-        ALLOCATE(z_alim(NC), CPvap(NC), CPliq(NC), Delta_Hvap(NC), Teb(NC))
+        ALLOCATE(A_ant(Nconst), B_ant(Nconst), C_ant(Nconst), D_ant(Nconst), E_ant(Nconst))
+        ALLOCATE(z_alim(Nconst), CPvap(Nconst), CPliq(Nconst), Delta_Hvap(Nconst), Teb(Nconst))
         ALLOCATE(COEFNRTL(3, npairs))
 
-        DO i = 1, NC
+        DO i = 1, Nconst
             READ(10,*) z_alim(i), A_ant(i), B_ant(i), C_ant(i), D_ant(i), E_ant(i)
         END DO
 
-        DO i = 1, NC
+        DO i = 1, Nconst
             READ(10,*) CPvap(i), CPliq(i), Delta_Hvap(i), Teb(i)
         END DO
-
-        READ(10,*)
     CLOSE(10)
 
 ! ----- Lecture de thermodat.txt -----

@@ -1,8 +1,9 @@
 101325.0                                           ! Pamb [Pa]
-100000.0                                           ! Qboilleur [W]
-85000.0						   ! Qcondenseur [W]
+3.6E+08                                            ! Qboilleur [J/h]
+3.06E+08					   ! Qcondenseur [J/h]
 3                                                  ! NC
 30						   ! NET
+3.6						   ! Alimentation [kmol/h]
 14						   ! Étage d'alimentation
 0.6  146.43  -7792.3  -20.614  0.024578   1.0      ! Z, Antoine  Chloroforme
 0.3   81.768  -6876.0   -8.7078  7.1926E-06  2.0   ! Z, Antoine  Methanol
